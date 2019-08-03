@@ -1,10 +1,11 @@
 import { apiKey } from './apiKey';
 
-function fetchCureentWeather(cityName) {
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey)
-    .then(resp => resp.json())
-    .then(data => {
-          console.log(data);
+function fetchCurrentWeather(cityName) {
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey + '&units=metric')
+    
+    .then(res => res.json())
+    .then(res => {
+          console.log(res.main.temp);
         // currentWeather(data);
     })
     .catch(function () {
@@ -12,7 +13,7 @@ function fetchCureentWeather(cityName) {
     });
 }
 
-// window.onload = function () {
-//   fetchCurrentWeather('Berlin');
-//   // fetchForecastWeather('Berlin');
-// }
+window.onload = function () {
+  fetchCurrentWeather('Berlin');
+  // fetch ForecastWeather('Berlin');
+}
