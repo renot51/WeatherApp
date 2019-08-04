@@ -58,7 +58,7 @@ function fetchForecastWeather(cityName, countryCode) {
         day = `In ${i + 1} days`;
       }
       document.querySelector('.row').innerHTML += `
-        <div class="cards col-2">
+        <div class="col-2">
           <div class="card bg-light">
             <h3 class="mx-auto mb-0" id="location${i}"> ${cityName} </h3>
             <hr>
