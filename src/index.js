@@ -1,5 +1,10 @@
 import { apiKey } from './apiKey';
 
+window.onload = function () {
+  fetchCurrentWeather('Berlin');
+  fetchForecastWeather('Berlin', 'DE');
+}
+
 function fetchCurrentWeather(cityName) {
   fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=' + apiKey + '&units=metric')
     
@@ -12,10 +17,6 @@ function fetchCurrentWeather(cityName) {
     });
 }
 
-window.onload = function () {
-  fetchCurrentWeather('Berlin');
-  fetchForecastWeather('Berlin', 'DE');
-}
 function fetchForecastWeather(cityName, countryCode) {
   fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + ',' + countryCode + '&appid=' + apiKey + '&units=metric')
   .then(res => res.json())
@@ -37,6 +38,33 @@ function fetchForecastWeather(cityName, countryCode) {
         const { wind: {speed}  } = res.list[i * 8];
 
         console.log(dt_txt, temp, description, speed, temp_min, temp_max);
+
+        // shorthand
+        document.querySelector(`#date0`).innerHTML = dt_txt;
+
+        document.querySelector('#desc0').innerHTML = description;
+
+
+
+        // the longer (clearer) way
+        // Get the DOM element where the data will go
+        const tempElement = document.querySelector(`#temp0`);
+  
+        // access the innerHTML property of that element
+        // set it to the value we got from destructuring the API response
+        tempElement.innerHTML = temp;
+
+        const windElement = document.querySelector('#wind0');
+
+        windElement.innerHTML = speed;
+
+        const tempMin = document.querySelector('#mntemp0');
+
+        tempMin.innerHTML = temp_min;
+
+        const tempMax = document.querySelector('#mxtemp0');
+
+        tempMax.innerHTML = temp_min;
       }
   })
   .catch(function () {
